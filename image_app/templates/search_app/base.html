@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- BootStrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <title>
+            Simple Shape Predictor
+        </title>
+        <style>
+            *:after{
+                clear: both;
+                display: block;
+                content: ""
+            }
+            *{
+                box-sizing: border-box;
+            }
+            body{
+                margin:0;
+                padding:0;
+                background:rgb(221, 213, 215);
+                font-family: 'Noto Sans', sans-serif;
+            }
+            body a{
+                transition:0.5s all;
+                -webkit-transition:0.5s all;
+                -moz-transition:0.5s all;
+                -o-transition:0.5s all;
+                -ms-transition:0.5s all;
+            }
+        </style>
+    </head>
+    <body>
+        <main role="main" class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

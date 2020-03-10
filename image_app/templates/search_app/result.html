@@ -1,0 +1,10 @@
+{% extends "search_app/base.html" %}
+{% block content %}
+    <img src="{{ model.image.url }}" height="400" width="400">
+     <h4>The Image is a {{ prediction }}</h4>
+     <div class="row">
+    <a href="{% url 'correct' %}" style="padding: 20px; border: 1px solid black; background: cadetblue; margin: 20px;"> <h3>Correct</h3></a>
+    <a href="{% url 'wrong' %}" style="padding: 20px; border: 1px solid black; background: red; margin: 20px;"> <h3>Wrong</h3></a>
+    
+    </div>
+{% endblock content %}
