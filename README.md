@@ -10,17 +10,23 @@ To run this project. Follow the following steps
 * Change working directory to project directory
 
 * Create a virtual environment using this command
+
 ! virtualenv venv
 
 * Activate the virtual environment
+
 ! source venv/bin/activate
 
 * Install the project requirements
+
 ! pip install -r requirements.txt
 
 * Migrate
+
 ! python manage.py makemigrations
+
 ! python manage.py migrate
 
 * Run server
+
 ! python manage.py runserver
