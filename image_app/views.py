@@ -53,19 +53,25 @@ def predict(classifer, image):
 def search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST, request.FILES)
+        # check if form is valid
         if form.is_valid():
             form.save()
-            image_i = form.cleaned_data.get('image')
+            # get the name of the user from the form
             name = form.cleaned_data.get('name')
+            # query to fetch the field
             model = Search.objects.get(name=name)
-            image_url = model.image.url
+            # get image path
             img_path = MEDIA_ROOT + '/' + model.get_image_name()
+            # pass the image into the image_loader function
             image = image_loader(img_path)
+            # get prediction
             prediction = predict(model_resnet, image)
+            # context to be passed to the template
             context = {
                 'name': name,
                 'prediction' : prediction[0]
             }
+            # store the name  parameter in a json file
             with open('file.json', 'w') as json_file:
                 json.dump(context, json_file)
             return redirect('result')
@@ -74,10 +80,13 @@ def search(request):
     return render(request, 'search_app/search_form.html', {'form': form})
 
 def result(request):
+    # open the json file
     with open('file.json', 'r') as f:
         data = json.load(f)
+    # unload the name and prediction parameter from the json file
     name = data['name']
     prediction = data['prediction']
+    # get object from model
     model = Search.objects.get(name=name)
     context = {
         'model' : model,
@@ -86,16 +95,22 @@ def result(request):
     return render(request, 'search_app/result.html', context)
 
 def correct(request):
+    # open the json file where the name is stored
     with open('file.json', 'r') as f:
         data = json.load(f)
+    #unload the name parameter
     name = data['name']
-    Search.objects.get(name=name).delete()
+    #delete field from model. Don't worry the picture is saved
+    model = Search.objects.get(name=name).delete()
     return render(request, 'search_app/final.html', {'message': "Yuupp, I knew it"})
 
 def wrong(request):
+    # open the json file where the name is stored
     with open('file.json', 'r') as f:
         data = json.load(f)
+    #unload the name parameter
     name = data['name']
+    #delete field from model. Don't worry the picture is saved
     model = Search.objects.get(name=name).delete()
     return render(request, 'search_app/final.html', {'message': "My bad, I'll do better next time"})
 
